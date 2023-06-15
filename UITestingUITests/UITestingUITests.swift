@@ -29,4 +29,30 @@ final class UITestingUITests: XCTestCase {
         XCTAssertTrue(addedCell.exists)
        
     }
+    
+    func testDeleteNoiseMaker() {
+    
+        
+        let app = XCUIApplication()
+        app.launch()
+        
+        let newNameBtn = app.navigationBars["Noise Makers"].buttons["Item"]
+        let nameField = app.alerts["Add Noise Maker"].scrollViews.otherElements.collectionViews.textFields["Shaggy"]
+        let addBtn = app.alerts["Add Noise Maker"].scrollViews.otherElements.buttons["Add"]
+        let addedCell = app.tables.staticTexts["Vita"]
+        let tablesQuery = app.tables
+        let deleteBtn = tablesQuery.buttons["Delete"]
+        
+        newNameBtn.tap()
+        nameField.tap()
+        nameField.typeText("Vita")
+        addBtn.tap()
+        
+        addedCell.swipeLeft()
+        deleteBtn.tap()
+        
+        
+        XCTAssertFalse(addedCell.exists)
+      
+    }
 }
